@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  asterisk_docker_v1:
+    container_name: asterisk_docker_v1
+    build: .
+    volumes:
+      - ./asterisk/extensions.conf:/etc/asterisk/extensions.conf
+      - ./asterisk/sip.conf:/etc/asterisk/sip.conf
+      - ./asterisk/rtp.conf:/etc/asterisk/rtp.conf
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    ports:
+      - 5060:5060/tcp
+      - 5060:5060/udp
+      - "10000-10099:10000-10099/udp" # RTP ports
